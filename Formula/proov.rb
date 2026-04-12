@@ -41,6 +41,7 @@ class Proov < Formula
 
     output = shell_output("#{bin}/proov file #{testpath}/agents.md --json")
     assert_match "\"scanMeta\"", output
-    assert_match "\"artifacts\"", output
+    assert_match "\"prompts\"", output
+    assert_match "\"agents\"", output
   end
 end
