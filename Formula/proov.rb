@@ -1,8 +1,8 @@
 class Proov < Formula
   desc "Detect, analyze, and report AI execution artifacts"
   homepage "https://github.com/AgenticHighway/proov"
-  license "AGPL-3.0-only"
   version "0.6.7"
+  license "AGPL-3.0-only"
 
   livecheck do
     url :stable
