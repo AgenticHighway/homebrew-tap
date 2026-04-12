@@ -1,7 +1,7 @@
 class Proov < Formula
   desc "Detect, analyze, and report AI execution artifacts"
   homepage "https://github.com/AgenticHighway/proov"
-  version "0.6.8"
+  version "0.6.9"
   license "AGPL-3.0-only"
 
   livecheck do
@@ -12,20 +12,20 @@ class Proov < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/AgenticHighway/proov/releases/download/v#{version}/proov-darwin-arm64.tar.gz"
-      sha256 "9769d64f4b5da97718ad7e971c47011331adf82267669c41f8289d0c0cd5c980"
+      sha256 "07b324aca0a2789b0e460d156028e54aa5866f4b1341f48b69695f1082914b98"
     else
       url "https://github.com/AgenticHighway/proov/releases/download/v#{version}/proov-darwin-amd64.tar.gz"
-      sha256 "673c17740051914e409c6d1a0326a42a2fb9689658925c230116487fa25c12b6"
+      sha256 "94b609b8c5bb8004d5b3dedcd728a6b4342992d405c3883f81d58cd47902c834"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/AgenticHighway/proov/releases/download/v#{version}/proov-linux-arm64.tar.gz"
-      sha256 "c29d6b0d5c28a9a311ff9f69c1d50fefa903ef5df68bcee72d55a99f683e6235"
+      sha256 "a9878e3f51e07114de60b3833a1bb7bc9489dce03858bad7d1d6720bbf75d4d0"
     else
       url "https://github.com/AgenticHighway/proov/releases/download/v#{version}/proov-linux-amd64.tar.gz"
-      sha256 "a9a6ac8934be879ce72a707b205e17b0aba42c0de31c6408001ca5201f935f43"
+      sha256 "6f9ec440a527c5f041501d9619bcce3a2ddd9bf44423971791046850d3e2bdf1"
     end
   end
 
