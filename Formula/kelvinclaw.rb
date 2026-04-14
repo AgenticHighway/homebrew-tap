@@ -52,10 +52,12 @@ class Kelvinclaw < Formula
       KelvinClaw's full release bundle is installed at:
         #{opt_libexec}/kelvinclaw
 
+      Canonical config path:
+        ~/.kelvinclaw/.env
+
       To get started:
-        cp #{opt_libexec}/kelvinclaw/.env.example .env
-        kelvin-gateway start
-        kelvin-tui
+        kelvin init
+        kelvin
     EOS
   end
 
