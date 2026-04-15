@@ -32,7 +32,13 @@ class Kelvinclaw < Formula
   end
 
   def install
-    bundle_root = buildpath.glob("kelvinclaw-*").find(&:directory?)
+    bundle_root =
+      if %w[kelvin kelvin-gateway kpm kelvin-tui].all? { |command| (buildpath/command).exist? }
+        buildpath
+      else
+        buildpath.glob("kelvinclaw-*").find(&:directory?)
+      end
+
     raise "Expected KelvinClaw release bundle" unless bundle_root
 
     bundle_path = libexec/"kelvinclaw"
