@@ -1,7 +1,7 @@
 class Kelvinclaw < Formula
   desc "Secure, stable, and modular harness for agentic AI workflows"
   homepage "https://github.com/AgenticHighway/kelvinclaw"
-  version "0.2.6"
+  version "0.2.7"
   license "MIT"
 
   livecheck do
@@ -14,20 +14,20 @@ class Kelvinclaw < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/AgenticHighway/kelvinclaw/releases/download/v#{version}/kelvinclaw-#{version}-macos-arm64.tar.gz"
-      sha256 "27917f40dfb26451247449c24443e5c4c68f65b739b055549fd6379eb4ec0895"
+      sha256 "11483424fe4b87aaa41d965fa51d9175625c1089bd5bc8bc2b0ca917e0dae0ca"
     else
       url "https://github.com/AgenticHighway/kelvinclaw/releases/download/v#{version}/kelvinclaw-#{version}-macos-x86_64.tar.gz"
-      sha256 "4446e737cd82fe586082dfa8184bf0c1230af3c6106c09f978236483a15ef7f4"
+      sha256 "8b4e11e7c0345d065e7bfee792cabcee8421a21d33cbccbe1094fca0bb5fb90e"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/AgenticHighway/kelvinclaw/releases/download/v#{version}/kelvinclaw-#{version}-linux-arm64.tar.gz"
-      sha256 "e3d008a2617e7d559f9d00050b56cb72a14d4918e29e830d02cd184ed0d90e87"
+      sha256 "2d1a589ab86d57dbb71330ce0a120f65aef04245e88cc0d75b349d50206b6e16"
     else
       url "https://github.com/AgenticHighway/kelvinclaw/releases/download/v#{version}/kelvinclaw-#{version}-linux-x86_64.tar.gz"
-      sha256 "335b2d581a9a29ac4bcc4ed86231f1a85dc1aa3c34da9b06750b216faab7abdc"
+      sha256 "2ace8936ad185c7fb78cf492528d27f8b796db6b4c5b77788d012a72571a3192"
     end
   end
 
