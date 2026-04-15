@@ -49,7 +49,11 @@ class Kelvinclaw < Formula
     bundle_path.install bundle_contents
 
     %w[kelvin kelvin-gateway kpm kelvin-tui].each do |command|
-      (bin/command).write_exec_script(bundle_path/command)
+      (bin/command).write <<~SH
+        #!/bin/bash
+        exec "#{bundle_path}/#{command}" "$@"
+      SH
+      chmod 0555, bin/command
     end
   end
 
