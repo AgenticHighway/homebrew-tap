@@ -31,27 +31,42 @@ class Kelvinclaw < Formula
     end
   end
 
+  def release_bundle_root?(path)
+    commands = %w[kelvin kelvin-host kelvin-gateway kelvin-registry kelvin-memory-controller kelvin-tui]
+
+    commands.all? { |command| (path/command).exist? } ||
+      commands.all? { |command| (path/"bin"/command).exist? }
+  end
+
   def install
     bundle_root =
-      if %w[kelvin kelvin-gateway kpm kelvin-tui].all? { |command| (buildpath/command).exist? }
+      if release_bundle_root?(buildpath)
         buildpath
       else
-        buildpath.glob("kelvinclaw-*").find(&:directory?)
+        buildpath.glob("kelvinclaw-*").find { |path| path.directory? && release_bundle_root?(path) }
       end
 
     raise "Expected KelvinClaw release bundle" unless bundle_root
 
     bundle_path = libexec/"kelvinclaw"
+    bundle_exec_path = (bundle_root/"bin").directory? ? bundle_path/"bin" : bundle_path
     ignored_entries = %w[. ..].freeze
     bundle_contents = Dir["#{bundle_root}/*", "#{bundle_root}/.*"].reject do |path|
       ignored_entries.include?(File.basename(path))
     end
     bundle_path.install bundle_contents
 
-    %w[kelvin kelvin-gateway kpm kelvin-tui].each do |command|
+    wrappers = {
+      "kelvin" => %("#{bundle_exec_path}/kelvin"),
+      "kelvin-gateway" => %("#{bundle_exec_path}/kelvin-gateway"),
+      "kpm" => %("#{bundle_exec_path}/kelvin" plugin),
+      "kelvin-tui" => %("#{bundle_exec_path}/kelvin-tui"),
+    }
+
+    wrappers.each do |command, exec_target|
       (bin/command).write <<~SH
         #!/bin/bash
-        exec "#{bundle_path}/#{command}" "$@"
+        exec #{exec_target} "$@"
       SH
       chmod 0555, bin/command
     end
@@ -72,9 +87,9 @@ class Kelvinclaw < Formula
   end
 
   test do
-    assert_match "Release-bundle launcher for KelvinClaw", shell_output("#{bin}/kelvin --help")
-    assert_match "Lifecycle manager for the kelvin-gateway daemon", shell_output("#{bin}/kelvin-gateway --help")
-    assert_match "Kelvin Plugin Manager", shell_output("#{bin}/kpm --help")
-    assert_match "Release-bundle launcher for kelvin-tui", shell_output("#{bin}/kelvin-tui --help")
+    assert_match "Usage: kelvin [COMMAND]", shell_output("#{bin}/kelvin --help 2>&1")
+    assert_match "Usage: kelvin-gateway", shell_output("#{bin}/kelvin-gateway --help 2>&1")
+    assert_match "Usage: kelvin plugin <COMMAND>", shell_output("#{bin}/kpm --help 2>&1")
+    assert_match "Usage: kelvin-tui", shell_output("#{bin}/kelvin-tui --help 2>&1")
   end
 end
