@@ -1,7 +1,7 @@
 class Vettd < Formula
   desc "Detect, analyze, and report AI execution artifacts"
   homepage "https://github.com/AgenticHighway/vettd-cli"
-  version "0.9.0"
+  version "0.9.2"
   license "AGPL-3.0-only"
 
   livecheck do
@@ -12,20 +12,20 @@ class Vettd < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/AgenticHighway/vettd-cli/releases/download/v#{version}/vettd-darwin-arm64.tar.gz"
-      sha256 "f4723927d4014d64c198b265059aee7ea511d4ca5aa3703f5d96afdbcc811e10"
+      sha256 "5ac6741ae7c0ab82179952ac69ebbd93ec1096fdbad042a82a746ed1dc394929"
     else
       url "https://github.com/AgenticHighway/vettd-cli/releases/download/v#{version}/vettd-darwin-amd64.tar.gz"
-      sha256 "9def3d23b463ae24e0e35a1a5a08bdb0b621c3ab690de63e3e28075f0c578f18"
+      sha256 "e6f840b716c35fb13674903380bfd7a5fbbd48556f752407583ef80f31023e69"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
       url "https://github.com/AgenticHighway/vettd-cli/releases/download/v#{version}/vettd-linux-arm64.tar.gz"
-      sha256 "3b9ea79857c3a28b3c1419672d0fb8f2b29dbf1ab2cddc33579b897c02e03ac1"
+      sha256 "6ca523561f38849ab3e918dfa333dcc86ec7dc26a29c18c4a273143cde29f0db"
     else
       url "https://github.com/AgenticHighway/vettd-cli/releases/download/v#{version}/vettd-linux-amd64.tar.gz"
-      sha256 "768d20cdafbc07998cf7d806edd3f854705743fa2a954abc2e574a22aaa99712"
+      sha256 "fa4e175898cf401dada4b14771c25ea87919134585d93ae7957fb4ea01a4a234"
     end
   end
 
